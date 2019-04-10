@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="shower/themes/material/styles/styles.css">
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+    </style>
+</head>
+<body class="shower list">
+
+    <header class="caption">
+        <h1>Shower Presentation Engine</h1>
+        <p>Yours Truly, Famous Inc.</p>
+    </header>
+
+    <section class="slide" id="cover">
+        <div class="background-sky"></div>
+        <h2>Angular Ivy Overview</h2>
+        <figure>
+            <img class="cover" src="pictures/angular.png" alt="Angular logo">
+        </figure>
+        <style>
+            .link {
+                color: rgb(13, 71, 161) !important;
+            }
+            .background-sky {
+                background: linear-gradient(145deg, rgb(13, 71, 161), rgb(66, 165, 245));
+                transform: skewY(-18deg);
+                transform-origin: 100% center 0px;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                padding: 48px 48px 32px;
+                overflow: hidden;
+                z-index: -1;
+                top: 25%;
+                right: 0;
+            }
+
+            #cover h2 {
+                margin: 30px 0 0;
+                text-align: center;
+                font-size: 70px;
+            }
+
+            #cover p {
+                margin: 10px 0 0;
+                text-align: center;
+                color: white;
+                font-style: italic;
+                font-size: 20px;
+            }
+
+        </style>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>Agenda</h2>
+        <ol>
+            <li>What is a rendering engine in JS frameworks?</li>
+            <li>Why Ivy?</li>
+            <li>How does it works?</li>
+            <li>Features</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+            <h2>What is a rendering engine?</h2>
+            <p>Part of a framework that translates your templates into DOM elements</p>
+            <div class="background-sky"></div>
+    </section>
+    <section class="slide">
+            <figure>
+                <img class="cover" src="pictures/react-dom.png" alt="React DOM library npm screenshot">
+            </figure>
+    </section>
+    <section class="slide">
+            <h2>Why Ivy?</h2>
+            <div class="background-sky"></div>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>Angular issues</h2>
+        <ol>
+            <li>Big bundle size</li>
+            <li>Compilation</li>
+            <li>Lazy loading</li>
+            <li>Debugging</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+            <h2>Component</h2>
+            <pre>
+                <code>&lt;div&gt;</code>
+                <code>    &lt;span&gt;{{title}}&lt;/span&gt;</code>
+                <code>    &lt;child-cmp *ngIf="show"&gt;&lt;/child-cmp&gt;</code>
+                <code>&lt;/div&gt;</code>
+            </pre>
+    </section>
+
+    <section class="slide">
+            <h2>View Engine rendering pipeline</h2>
+            <figure>
+                <img src="pictures/pipeline46.png" alt="Angular 4-6 pipeline">
+            </figure>
+    </section>
+    <section class="slide">
+            <h2>View Engine output</h2>
+            <figure>
+                <img src="pictures/ngfactories.png" alt="ng factories">
+            </figure>
+    </section>
+    <section class="slide">
+            <h2>Compiled with View Engine</h2>
+            <figure>
+                <img style="height:100%; width: 100%;" src='pictures/withviewengine.png' alt="view engine code"></img>  
+            </figure>
+    </section>
+
+    <section class="slide">
+            <h2>View Engine</h2>
+            <pre>
+                    <code><span class="comment">// Angular core code</span></code>
+                    <code>function createViewNodes(view: ViewDef) {</code>
+                    <code>    view.nodes.foreach(node => {</code>
+                    <code>        if(isElementDef(node)) createElement(node);</code>
+                    <code>        if(hasListeners(node)) listenToElementOutput(node);</code>
+                    <code>        if(hasPipe(node)) createPipeInstance(node);</code>
+                    <code>    });</code>
+                    <code>}</code>
+            </pre>
+    </section>
+
+    <section class="slide">
+            <h2> Ivy rendering pipeline</h2>
+            <figure>
+                <img src="pictures/ivypipeline.png" alt="Angular ivy pipeline">
+            </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Compiled with Ivy</h2>
+        <figure>
+            <img  src='pictures/compiledwithivy1.png' alt="ivy output"></img>  
+        </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Compiled with Ivy</h2>
+        <figure>
+            <img  src='pictures/compiledwithivy2.png' alt="ivy output"></img>  
+        </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Compiled with Ivy</h2>
+        <figure>
+            <img  src='pictures/compiledwithivy3.png' alt="ivy output"></img>  
+        </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Ivy uses a new instruction set</h2>
+        <div class="background-sky"></div>
+    </section>
+
+    <section class="slide">
+        <h2>Runtime is based on incremental DOM</h2>
+        <div class="background-sky"></div>
+    </section>
+
+    <section class="slide">
+        <figure>
+            <img class="cover" src="pictures/incremental-dom.png" alt="incremental dom github">
+        </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Why incremental DOM?</h2>
+        <ul>
+            <li>The incremental nature allows for significantly reduced memory allocation during render passes, allowing for more predictable performance.</li>
+            <li>It easily maps to template based approaches. Control statements and loops can be mixed freely with element and attribute declarations.</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Compiled with Ivy</h2>
+        <figure>
+            <img  src='pictures/compiledwithivy2.png' alt="ivy output"></img>  
+        </figure>
+    </section>
+
+    <section class="slide">
+        <h2>Locality</h2>
+        <ul>
+            <li>Components/directives/etc. depend on each other via public API only</li>
+            <li>Compiling them requires only local information</li>
+        </ul>
+        <div class="background-sky"></div>
+    </section>
+
+    <section class="slide">
+        <h2>Non-Locality in View Engine</h2>
+        <figure>
+            <img  src='pictures/viewenginelocality.png' alt="view engine locality"></img>  
+        </figure>
+    </section>
+
+    <section class="slide">
+            <h2>Locality in Ivy</h2>
+            <figure>
+                <img  src='pictures/ivyloc.png' alt="ivy locality"></img>  
+            </figure>
+        </section>
+
+    <section class="slide">
+        <h2>Locality in Ivy</h2>
+        <figure>
+            <img  src='pictures/ivylocality1.png' alt="ivy locality"></img>  
+        </figure>
+    </section>
+
+    <section class="slide">
+        <div class="background-sky"></div>
+        <h2>Locality in Ivy</h2>
+        <ul>
+            <li>Ivy provides a stable API that allows shipping AOT compiled code to NPM</li>
+            <li>Better JIT/AOT interop</li>
+            <li>Faster compilation</li>
+        </ul>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>Now framework is tree-shakable!</h2>
+    </section>
+
+    <section class="slide">
+        <h2>Tree-shaking in Ivy</h2>
+        <figure>
+            <img class="cover" src="pictures/treeshakingivy.png" alt="tree shaking in ivy">
+        </figure>
+    </section>
+
+    <section class="slide">
+            <h2>Ivy can tree-shake</h2>
+            <ul>
+                <li>Dependency injection</li>
+                <li>ng-template & ng-container</li>
+                <li>Animations</li>
+                <li>Pipes</li>
+                <li>i18n</li>
+                <li>Core framework services</li>
+            </ul>
+        </section>
+    <section class="slide">
+         <div class="background-sky"></div>
+        <h2>ComponentFactoryResolver</h2>
+        <p>Essentially a Map&lt;Component, ComponentFactory&gt;</Component></p>
+        <p>In Ivy, every component is its own factory</p>
+    </section>
+
+    <section class="slide">
+        <div class="background-sky"></div>
+        <h2>~5kB "Hello World" application</h2>
+        <p class="note">(minified, compressed)</p>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>Create application with Ivy enabled</h2>
+            <pre>
+                <code>ng new my-app --experemental-ivy</code>
+            </pre>
+    </section>
+
+    <section class="slide">
+            <h2>Compile your app with Ivy</h2>
+            <pre>
+                <code>node_modules/.bin/ivy-ngcc</code>
+            </pre>
+            <p>Convert node modules to Ivy-compatible format</p>
+    </section>
+
+    <section class="slide">
+            <h2>Compile your app with Ivy</h2>
+            <p>Add to tsconfig.json</p>
+            <pre>
+                <code>"angularCompilerOptions": {</code>
+                <code>  "enableIvy": "ngtsc"</code>
+                <code>}</code>
+            </pre>
+    </section>
+
+    <section class="slide">
+            <h2>main.ts</h2>
+            <pre>
+                <code>import { ɵrenderComponent as renderComponent } from '@angular/core';</code>
+                <code>import { AppComponent } from './app/app.component';</code>
+                <code></code>
+                <code>renderComponent(AppComponent);</code>
+            </pre>
+    </section>
+
+    <section class="slide">
+            <h2>Compile your app with Ivy</h2>
+            <ul>
+                <li>Remove BrowserModule from app.module.ts</li>
+                <li>Remove polyfills from angular.json</li>
+            </ul>
+    </section>
+
+    <section class="slide" id="cover">
+            <figure>
+                <img class="cover" src="pictures/sad.png" alt="sad smile">
+            </figure>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>What about real-world application?</h2>
+            <a class="link" href="https://medium.com/ngx/angular-ivy-perfomance-f98e5ca2e45e">Angular Ivy performance</a>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>Other features</h2>
+            <ul>
+                <li>Debugging</li>
+                <li>Lazy loading</li>
+                <li>Guard prioritization</li>
+            </ul>
+    </section>
+
+    <section class="slide">
+        <h2>Ugly error stack traces</h2>
+        <figure>
+            <img class="cover" src="pictures/trace.png" alt="ng error trace">
+        </figure>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>Debugging</h2>
+            <pre>
+                <code>$0</code>
+                <code>const cmp = ng.getComponent($0)</code>
+            </pre>
+    </section>
+
+    <section class="slide">
+            <h2>Ivy lazy-loading</h2>
+            <figure>
+                <img src="pictures/ivylazy.png" alt="lazy loading">
+            </figure>
+    </section>
+
+    <section class="slide">
+            <h2>Guards</h2>
+            <figure>
+                <img src="pictures/guards.png" alt="lguards">
+            </figure>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>What's next?</h2>
+            <ul>
+                <li>Dynamic template composition</li>
+                <li>Zone-less API</li>
+                <li>Higher order components</li>
+            </ul>
+    </section>
+
+    <section class="slide">
+            <div class="background-sky"></div>
+            <h2>Deep dive</h2>
+            <ul>
+                <li><a class="link" href="https://github.com/angular/angular/blob/master/packages/compiler/design/separate_compilation.md">Separate compilation</a></li>
+                <li><a class="link" href="https://github.com/angular/angular/blob/master/packages/compiler/design/architecture.md">Ivy architecture</a></li>
+            </ul>
+    </section>
+
+    <section class="slide">
+            <h2>Other resources</h2>
+            <ul>
+                    <li><a class="link" href="https://www.youtube.com/watch?v=jnp_ny4SOQE&t=1324s">What's new in Angular (Google I/O '18)</a></li>
+                    <li><a class="link" href="https://medium.com/ngx/angular-ivy-renderer-%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BD%D0%BE%D1%81%D1%82%D1%8C-93-20e0aff2e861">Angular Ivy Renderer готовность 93%</a></li>
+                    <li><a class="link" href="https://blog.angularindepth.com/ivy-engine-in-angular-first-in-depth-look-at-compilation-runtime-and-change-detection-876751edd9fd">Ivy engine in Angular</a></li>
+                <li><a class="link" href="https://www.youtube.com/watch?v=MMPl9wHzmS4">Angular Ivy by example | Jason Aden | AngularConnect 2018</a></li>
+                <li><a class="link" href="https://www.youtube.com/watch?v=isb5Ef6yI48">The Theory of Angular Ivy | Alex Rickabaugh | AngularConnect 2018</a></li>
+                <li><a class="link" href="https://www.youtube.com/watch?v=O5zM5sWptTw">Podcast ngRuAir #1 - Ivy Renderer</a></li>
+            </ul>
+    </section>
+    <section class="slide" id="cover">
+            <div class="background-sky"></div>
+            <h2>Thanks!</h2>
+            <figure>
+                <img class="cover" src="pictures/angular.png" alt="Angular logo">
+            </figure>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.min.js"></script>
+
+</body>
+</html>
