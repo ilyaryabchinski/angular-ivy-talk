@@ -5,6 +5,6 @@
 1. Clone repository
 2. Open `index.html` in your browser
 
-#Github pages
+## Github pages
 
 [Link](https://ilyaryabchinski.github.io/angular-ivy-talk/)
